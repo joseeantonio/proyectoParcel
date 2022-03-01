@@ -1,0 +1,315 @@
+@charset "UTF-8";
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video, button {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+  vertical-align: baseline;
+}
+
+img, picture, video, iframe, figure {
+  max-width: 100%;
+  width: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center center;
+}
+
+a {
+  display: block;
+}
+
+p a {
+  display: inline;
+}
+
+li {
+  list-style-type: none;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+h1, h2, h3, h4, h5, h6, p, span, a, strong, blockquote, i, b, u, em {
+  font-size: 1em;
+  font-weight: inherit;
+  font-style: inherit;
+  text-decoration: none;
+  color: inherit;
+}
+
+:root {
+  --negro: #000000;
+  --blanco: #ececec;
+  --sombra-ppal: #c9c9c9;
+  --sombra-sec: #ffffff;
+  --borde-negro: #00000050;
+  --marcado: rgb(127, 195, 255);
+  /* Tipografía */
+  --tipo-principal: Helvetica, Arial, sans-serif;
+}
+
+/* Las adaptamos al modo oscuro */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --negro: #ececec;
+    --blanco: #303030;
+    --sombra-ppal: #242424;
+    --sombra-sec: #3c3c3c;
+    --borde-negro: #FFFFFF50;
+  }
+}
+body {
+  background-color: #a4a3a3;
+}
+
+/*HEADER*/
+.ultimo_li {
+  /*hacemos esto porque con el flex del encabezado se queda el ultimo junto a la derecha de la pagina*/
+  padding-right: 100px;
+}
+
+/*modificamos la imagen del header (logo)*/
+header img {
+  max-width: 150px;
+  padding-left: 20px;
+}
+
+/*Juntamos todos los elementos del header en comun*/
+header ul {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff;
+}
+
+header a {
+  font-family: blowbrush;
+  font-size: 25px;
+}
+
+/*MAIN*/
+body {
+  background-color: #FF7575;
+}
+
+.intro {
+  display: flex;
+  margin-top: 5%;
+  justify-content: center;
+}
+
+.intro video {
+  width: 30%;
+}
+
+.intro p {
+  width: 30%;
+  padding-top: 10%;
+  font-size: 20px;
+}
+
+/*Creamos la caja donde vamos a tener dentro el contenido*/
+.caja {
+  margin-bottom: 17%;
+  margin-left: 5%;
+  margin-top: 50px;
+  width: 90%;
+  max-width: 120em;
+  /*el padding para tener una distancia por todos lados*/
+  padding: 1em;
+  /*Este mixing lo que hace es que la primera segun si ponemos 1 o 2 sera blanco o negro el fondo
+  el segundo es para el borde de la caja y lo tercero es el sombreado*/
+  color: var(--negro);
+  transition: all 0.4s ease;
+  border-radius: 1em;
+  background-color: var(--blanco);
+  box-shadow: 2em 2em 4em var(--sombra-ppal), inset 0 0 0 transparent, inset 0 0 0 transparent;
+}
+
+/*seleccionamos los ul para moverlo al centro todo dentro de la caja*/
+.caja .ul {
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+/*parte del tab*/
+/*utilizamos de nuevo el mixing de antes y le damos estilo a los li*/
+.caja .li {
+  background-color: aliceblue;
+  padding: 1em;
+  margin: 0 1em 0 0;
+  color: var(--negro);
+  transition: all 0.4s ease;
+  border-radius: 1em;
+  background-color: var(--blanco);
+  box-shadow: 1em 1em 2em var(--sombra-ppal), inset 0 0 0 transparent, inset 0 0 0 transparent;
+}
+
+/*Creamos esta seleccion para cuando este activo ese li cambie el estilo y destaque de los demas*/
+.caja .li.activo {
+  background-color: red;
+  color: black;
+  /*paraque no sea tan espontaneo le hacemos una transicion*/
+  transition: 2s;
+}
+
+/*Este lo seleccionamos para lo que va a estar por encima de la caja y por debajo de las imagenes*/
+.caja .bloque_abajo {
+  position: relative;
+  min-height: 310px;
+  display: flex;
+  justify-content: center;
+}
+
+/*Es para darle estilo a lo que rodea la imagen*/
+.caja .cajita {
+  margin: 1em;
+  padding: 1em;
+  position: absolute;
+  top: 0;
+  /*Este mixing ya esta esplicado*/
+  color: var(--negro);
+  transition: all 0.4s ease;
+  border-radius: 1em;
+  background-color: var(--blanco);
+  box-shadow: 0.5em 0.5em 1em var(--sombra-ppal), inset 0 0 0 transparent, inset 0 0 0 transparent;
+  /*Y esta parte es la importante le damos esta opacidad para que no se vea la imagen*/
+  opacity: 0;
+}
+
+.caja .cajita.activo {
+  /*Con esta lo que hacemos es que cuando con el js lo convirtamos en clase activa ,le vamos a dar esta opacidad
+  por lo que se va a poder ver.De esta forma solo se veria una imagen*/
+  opacity: 1;
+  transition: 2s;
+}
+
+/*Aqui si le damos estilo a las imagenes de dentro de la cajita*/
+.cajita img {
+  max-height: 400px;
+}
+
+/*Le damos estilo a el video*/
+video {
+  width: 23%;
+  margin: 0 2em 2em 2em;
+}
+
+/*parte del carrusel*/
+/*definimos la caja principal*/
+.carrusel {
+  width: 90%;
+  max-width: 32em;
+  padding: 2em;
+  color: var(--negro);
+  transition: all 0.4s ease;
+  border-radius: 1em;
+  background-color: var(--blanco);
+  box-shadow: 1em 1em 2em var(--sombra-ppal), inset 0 0 0 transparent, inset 0 0 0 transparent;
+  overflow: hidden;
+  margin-left: 20%;
+  margin-bottom: 12%;
+}
+
+/*luego la caja donde estan las dos imagenes*/
+.carrusel .grande {
+  width: 200%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em;
+  transition: all 0.5s ease;
+  transform: translateX(-50%);
+}
+
+/*estilo de las dos img de dentro*/
+.carrusel .img {
+  width: calc(50% - 2em);
+  min-height: 10vh;
+  background-color: rgba(240, 248, 255, 0.6);
+}
+
+/*la caja de los puntos que van abajo de la caja donde estan las imagenes*/
+.carrusel .puntos {
+  width: 100%;
+  padding: 0.4em;
+  margin: 1em 0 0;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+/*el estilo de cada punto*/
+.carrusel .punto {
+  width: 2em;
+  height: 2em;
+  margin: 0.1em 1em 0;
+  color: var(--negro);
+  transition: all 0.4s ease;
+  border-radius: 1em;
+  background-color: var(--blanco);
+  box-shadow: 0.6em 0.6em 1.2em var(--sombra-ppal), inset 0 0 0 transparent, inset 0 0 0 transparent;
+  background-color: rgba(255, 255, 255, 0.68);
+}
+
+/*El estilo cuando el punto este activo*/
+.carrusel .punto.activo {
+  background-color: #ff0000;
+}
+
+/*audio*/
+.audio {
+  margin-left: 35%;
+  width: 100%;
+  margin-bottom: 5%;
+}
+
+.audio > p {
+  margin-bottom: 2%;
+}
+
+/*responsive*/
+@media screen and (max-width: 768px) and (min-width: 320px) {
+  /*header*/
+  /*bajamos el tamaño del nav*/
+  header a {
+    font-size: 15px;
+  }
+
+  .ultimo_li {
+    padding-right: 40px;
+  }
+
+  header img {
+    width: 69%;
+  }
+
+  /*Y cambiamos el margin del carrusel*/
+  .carrusel {
+    margin-left: 8%;
+  }
+
+  .audio {
+    margin-left: 3%;
+  }
+}
+/*# sourceMappingURL=index.6495ea9d.css.map */
